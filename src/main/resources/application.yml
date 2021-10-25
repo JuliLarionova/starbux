@@ -1,0 +1,32 @@
+server:
+  port: 8130
+  servlet:
+    context-path: /api/starbux
+
+spring:
+  jpa:
+    properties:
+      hibernate.hbm2ddl.auto: "none"
+      hibernate.dialect: "org.hibernate.dialect.PostgreSQL95Dialect"
+      hibernate.show_sql: false
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.temp.use_jdbc_metadata_defaults: false
+  liquibase:
+    url: jdbc:postgresql://localhost:5432/starbux
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    change-log: classpath:/db/changelog/db-changelog.xml
+    contexts: ${spring.profiles.active}
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/starbux}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+app:
+  swagger:
+    base-package: "com.bstlr.starbux"
+    api-info:
+      title: "Starbux API Doc"
+      description: "Documentation for Starbux Application"
+    secure-paths-regex: "/v1.*"

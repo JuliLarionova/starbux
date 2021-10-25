@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <include file="db/changelog/changes/create-customer-table.sql"/>
+    <include file="db/changelog/changes/create-drink-table.sql"/>
+    <include file="db/changelog/changes/create-topping-table.sql"/>
+    <include file="db/changelog/changes/create-order-table.sql"/>
+    <include file="db/changelog/changes/create-order-item-drink-table.sql"/>
+    <include file="db/changelog/changes/create-order-item-topping-table.sql"/>
+</databaseChangeLog>
