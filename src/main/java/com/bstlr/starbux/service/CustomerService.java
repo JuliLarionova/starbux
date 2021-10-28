@@ -1,4 +1,4 @@
-package com.bstlr.starbux.services;
+package com.bstlr.starbux.service;
 
 import com.bstlr.starbux.entity.CustomerEntity;
 import com.bstlr.starbux.repository.CustomerRepository;
@@ -13,12 +13,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository repository;
-
-    public void createNewCustomer(String name) {
-        repository.save(CustomerEntity.builder()
-                .name(name)
-                .build());
-    }
 
     public CustomerEntity getCustomerOrCreate(String name, String emailAddress) {
         Optional<CustomerEntity> customer = repository.findByEmailAddress(emailAddress);

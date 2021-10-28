@@ -5,11 +5,9 @@ import com.bstlr.starbux.common.Errors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 @Slf4j
@@ -26,13 +24,14 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ClientException.class)
     protected ResponseEntity<String> handleClientException(ClientException ex, WebRequest request) {
-       var response = Errors.builder()
-               .message(ex.getMessage())
-               .code(ex.getCode())
-               .build();
+        var response = Errors.builder()
+                .message(ex.getMessage())
+                .code(ex.getCode())
+                .build();
         //logException("ClientException", String.format("ClientException %s", response), request, response, ex, log::info);
         return ResponseEntity.badRequest().body(ex.getLocalizedMessage());
     }
+}
 /*
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Errors> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
@@ -82,36 +81,7 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(ExecutionException.class)
-    protected ResponseEntity<Errors> handleExecutionException(ExecutionException ex, WebRequest request) {
-        if (ex.getCause() instanceof ClientException) {
-            return handleClientException((ClientException) ex.getCause(), request);
-        } else {
-            return handleException(ex.getCause(), request);
-        }
-    }
 
-    @ExceptionHandler(WarehouseRestClientException.class)
-    protected ResponseEntity<Errors> handleWHRestClientException(WarehouseRestClientException ex, WebRequest request) {
-        if (isNotEmpty(ex.getResponse().getClientErrors())) {
-            var errMsgs = ex.getResponse().getClientErrors().stream()
-                    .map(e -> new Error(e.getMessage(), e.getCode())).collect(toList());
-            return handleRestClientException(errMsgs, "warehouse", ex, request);
-        } else {
-            return handleException(ex.getCause(), request);
-        }
-    }
-
-    @ExceptionHandler(PimRestClientException.class)
-    protected ResponseEntity<Errors> handlePIMRestClientException(PimRestClientException ex, WebRequest request) {
-        if (isNotEmpty(ex.getResponse().getClientErrors())) {
-            var errMsgs = ex.getResponse().getClientErrors().stream()
-                    .map(e -> new Error(e.getMessage(), e.getCode())).collect(toList());
-            return handleRestClientException(errMsgs, "pim", ex, request);
-        } else {
-            return handleException(ex.getCause(), request);
-        }
-    }
 
     private ResponseEntity<Errors> handleRestClientException(List<Error> clientErrors, String remoteService,
                                                              Exception ex, WebRequest request) {
@@ -128,10 +98,4 @@ public class ControllerExceptionHandler {
         MDC.clear();
     }
 
-    private void addParamsTypeToMDC(String type, WebRequest request, Errors response, String exMessage) {
-        MDC.put(EXCEPTION_TYPE, type);
-        MDC.put(EXCEPTION_MESSAGE, exMessage);
-        MDC.put(REQUEST, request.toString());
-        MDC.put(RESPONSE, response.toString());
-    }*/
-}
+}*/

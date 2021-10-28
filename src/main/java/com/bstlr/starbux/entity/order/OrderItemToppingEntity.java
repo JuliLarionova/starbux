@@ -1,8 +1,9 @@
-package com.bstlr.starbux.entity;
+package com.bstlr.starbux.entity.order;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -28,5 +29,9 @@ public class OrderItemToppingEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_item_drink_id", referencedColumnName = "id")
     OrderItemDrinkEntity drink;
+
+    @NonNull
+    @Column(name = "total_cost")
+    BigDecimal totalCost;
 }
 

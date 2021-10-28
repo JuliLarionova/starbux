@@ -1,4 +1,4 @@
-package com.bstlr.starbux.entity;
+package com.bstlr.starbux.entity.order;
 
 import lombok.*;
 
@@ -27,21 +27,22 @@ public class OrderItemDrinkEntity {
     @Column(name = "item_id")
     UUID itemId;
 
-    @NonNull
-    @Builder.Default
-    Integer amount = 1;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    OrderEntity order;
+    @Column(name = "order_id")
+    UUID orderId;
 
     @OneToMany(cascade = ALL, mappedBy = "drink", fetch = LAZY, orphanRemoval = true)
-    @JoinColumn(name = "drink_id", referencedColumnName = "id")
     @Builder.Default
     List<OrderItemToppingEntity> toppings = new ArrayList<>();
 
-    public void addToppings(List<OrderItemToppingEntity> toppingList){
+    /**
+     * Total cost of drink with toppings
+     */
+    @NonNull
+    @Column(name = "total_cost")
+    BigDecimal totalCost;
+
+    public void addToppings(List<OrderItemToppingEntity> toppingList) {
         toppings.addAll(toppingList);
-        toppingList.forEach(topping->topping.setDrink(this));
+        toppingList.forEach(topping -> topping.setDrink(this));
     }
 }

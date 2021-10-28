@@ -1,11 +1,3 @@
-#logging:
-#  level:
-#    ru.utkonos.wms: debug
-#    org.hibernate.SQL: debug
-#    org.hibernate.type.descriptor.sql: trace
-#  aop:
-#    max-response-length: 2000
-
 server:
   port: 8130
   servlet:

@@ -1,0 +1,14 @@
+{
+  "total_cart_cost": 10,
+  "drinks_with_toppings": [
+    {
+      "id": "ee3e4567-e91b-12d3-1111-5566f2223333",
+      "toppings": [
+        {
+          "id": "ee3e4567-e91b-12d3-1111-5566f2222111",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

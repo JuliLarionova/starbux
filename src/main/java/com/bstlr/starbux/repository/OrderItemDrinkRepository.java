@@ -1,7 +1,6 @@
 package com.bstlr.starbux.repository;
 
-import com.bstlr.starbux.entity.OrderItemDrinkEntity;
-import com.bstlr.starbux.web.dto.ItemType;
+import com.bstlr.starbux.entity.order.OrderItemDrinkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

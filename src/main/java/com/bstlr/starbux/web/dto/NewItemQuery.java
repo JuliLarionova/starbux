@@ -1,16 +1,16 @@
 package com.bstlr.starbux.web.dto;
 
 import com.bstlr.starbux.entity.Currency;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Data
-@AllArgsConstructor
+@Value
 @Builder(toBuilder = true)
+@JsonDeserialize(builder = NewItemQuery.NewItemQueryBuilder.class)
 public class NewItemQuery {
     @NotNull
     String name;
@@ -18,4 +18,8 @@ public class NewItemQuery {
     BigDecimal price;
     @NotNull
     Currency currency;
+
+    public enum ItemType {
+        DRINK, TOPPING;
+    }
 }

@@ -1,19 +1,20 @@
 package com.bstlr.starbux.web.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.Value;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Value
 @Builder(toBuilder = true)
+@JsonDeserialize(builder = OrderQuery.OrderQueryBuilder.class)
 public class OrderQuery {
 
     @NotNull
-    CustomerInfo customerInfo;
+    CustomerInfoDto customerInfo;
     @Builder.Default
     List<DrinkWithToppings> drinkWithToppings = new ArrayList<>();
 }

@@ -21,37 +21,21 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter'
-//	implementation "org.springframework.boot:spring-boot-starter-web"
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	runtime('org.postgresql:postgresql:42.2.1')
-//// https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
-//	implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
-//// https://mvnrepository.com/artifact/javax.validation/validation-api
-////	implementation group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
-//	implementation group: 'com.google.guava', name: 'guava', version: '23.0'
-//
-//	implementation "org.slf4j:slf4j-api:$slf4_version"
-//	implementation 'io.springfox:springfox-boot-starter:3.0.0'
-//	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
-//
-//	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.4.1'
-//	implementation group: 'org.liquibase', name: 'liquibase-gradle-plugin', version: '2.0.4'
-//
-//	testImplementation group: 'org.testcontainers', name: 'testcontainers', version: '1.14.3'
-
 
 	implementation('org.springframework.boot:spring-boot-starter')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-jdbc')
+	implementation('org.springframework.boot:spring-boot-starter-validation')
 	implementation('javax.validation:validation-api')
 	implementation('org.liquibase:liquibase-core')
 	implementation ('com.fasterxml.jackson.core:jackson-databind')
 	runtime('org.postgresql:postgresql:42.2.1')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.testcontainers:testcontainers:1.14.3')
 	testImplementation "junit:junit:$junit_version"
+	testImplementation "org.hamcrest:hamcrest-library"
+/*	implementation ('ch.qos.logback:logback-core')*/
 
 	implementation "io.springfox:springfox-boot-starter:$springfox_version"
 	implementation "io.springfox:springfox-swagger-ui:$springfox_version"
