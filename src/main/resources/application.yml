@@ -1,6 +1,6 @@
 #logging:
 #  level:
-#    ru.utkonos.wms: debug
+#    com.bstlr.starbux: debug
 #    org.hibernate.SQL: debug
 #    org.hibernate.type.descriptor.sql: trace
 #  aop:
