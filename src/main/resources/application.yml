@@ -5,7 +5,7 @@ logging:
     org.hibernate.type.descriptor.sql: trace
 
 server:
-  port: 8130
+  port: ${PORT:8130}
   servlet:
     context-path: /api/starbux
 
@@ -18,16 +18,16 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.temp.use_jdbc_metadata_defaults: false
   liquibase:
-    url: jdbc:postgresql://localhost:5432/starbux
-    user: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/starbux}
+    user: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:postgres}
     change-log: classpath:/db/changelog/db-changelog.xml
     contexts: ${spring.profiles.active}
   datasource:
     driver-class-name: "org.postgresql.Driver"
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/starbux}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/starbux}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:postgres}
 
 app:
   swagger:
