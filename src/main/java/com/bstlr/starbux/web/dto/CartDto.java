@@ -20,5 +20,5 @@ public class CartDto {
     BigDecimal totalCartCost;
     @Builder.Default
     @JsonProperty("drinks_with_toppings")
-    List<DrinkWithToppings> drinksWithToppings = new ArrayList<>();
+    List<DrinkWithToppingsDto> drinksWithToppings = new ArrayList<>();
 }

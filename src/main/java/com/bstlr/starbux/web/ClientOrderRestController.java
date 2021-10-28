@@ -50,12 +50,12 @@ public class ClientOrderRestController {
     @ApiResponses({
             @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK")
     })
-    @PostMapping(value = "/{orderId}")
+    @GetMapping(value = "/{orderId}")
     public CartDto order(@PathVariable UUID orderId) {
         return cartDtoConverter.convert(orderItemDrinkService.findOrderItemsByOrderId(orderId));
     }
 
-    @ApiOperation(value = "Place order", response = OrderCostDto.class)
+    @ApiOperation(value = "Place order and get order cost with discount", response = OrderCostDto.class)
     @ApiResponses({
             @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK")
     })

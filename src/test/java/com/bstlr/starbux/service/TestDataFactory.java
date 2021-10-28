@@ -10,7 +10,7 @@ import com.bstlr.starbux.entity.order.OrderItemDrinkEntity.OrderItemDrinkEntityB
 import com.bstlr.starbux.entity.order.OrderItemToppingEntity;
 import com.bstlr.starbux.entity.order.OrderItemToppingEntity.OrderItemToppingEntityBuilder;
 import com.bstlr.starbux.service.order.OrdersPerCustomer;
-import com.bstlr.starbux.web.dto.DrinkWithToppings;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -93,7 +93,7 @@ public class TestDataFactory {
         return OrderEntity.builder()
                 .id(ORDER_ID)
                 .customerId(CUSTOMER_ID)
-                .status(OrderEntity.OrderStatus.NEW);
+                .status(OrderEntity.OrderStatus.ACTIVE);
     }
 
     public static OrderItemDrinkEntityBuilder getOrderItemDrinkBuilder(UUID drinkId) {
@@ -115,15 +115,15 @@ public class TestDataFactory {
         return new OrdersPerCustomer(1L, CUSTOMER_ID, CUSTOMER_NAME);
     }
 
-    public static DrinkWithToppings getDrinkWithToppings() {
-        return DrinkWithToppings.builder()
+    public static DrinkWithToppingsDto getDrinkWithToppings() {
+        return DrinkWithToppingsDto.builder()
                 .id(TEA_ID)
                 .toppings(Set.of(getTopping()))
                 .build();
     }
 
-    public static DrinkWithToppings.Topping getTopping() {
-        return DrinkWithToppings.Topping.builder()
+    public static DrinkWithToppingsDto.Topping getTopping() {
+        return DrinkWithToppingsDto.Topping.builder()
                 .id(MILK_ID)
                 .amount(2)
                 .build();
@@ -145,5 +145,10 @@ public class TestDataFactory {
                 .currency(Currency.euro)
                 .price(price)
                 .build();
+    }
+
+
+    public static MostUsedTopping getMostUsedTopping() {
+        return new MostUsedTopping(5L, MILK_ID, TOPPING_MILK);
     }
 }

@@ -3,8 +3,8 @@ package com.bstlr.starbux.web.converter;
 import com.bstlr.starbux.entity.order.OrderItemDrinkEntity;
 import com.bstlr.starbux.entity.order.OrderItemToppingEntity;
 import com.bstlr.starbux.web.dto.CartDto;
-import com.bstlr.starbux.web.dto.DrinkWithToppings;
-import com.bstlr.starbux.web.dto.DrinkWithToppings.Topping;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto.Topping;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class OrderItemsToCartDtoConverter {
 
     public CartDto convert(List<OrderItemDrinkEntity> orderItems) {
-        List<DrinkWithToppings> drinksWithToppings = orderItems.stream()
-                .map(orderItem -> DrinkWithToppings.builder()
+        List<DrinkWithToppingsDto> drinksWithToppings = orderItems.stream()
+                .map(orderItem -> DrinkWithToppingsDto.builder()
                         .id(orderItem.getItemId())
                         .toppings(getToppings(orderItem.getToppings()))
                         .build())

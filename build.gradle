@@ -13,6 +13,7 @@ ext {
 	slf4_version = '1.7.28'
 	junit_version = '4.13.2'
 	springfox_version = '3.0.0'
+	mapstruct_version = '1.4.2.Final'
 }
 
 repositories {
@@ -34,13 +35,15 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.testcontainers:testcontainers:1.14.3')
 	testImplementation "junit:junit:$junit_version"
-	testImplementation "org.hamcrest:hamcrest-library"
+	testImplementation 'org.hamcrest:hamcrest-library'
+	implementation "org.mapstruct:mapstruct:$mapstruct_version"
 /*	implementation ('ch.qos.logback:logback-core')*/
 
 	implementation "io.springfox:springfox-boot-starter:$springfox_version"
 	implementation "io.springfox:springfox-swagger-ui:$springfox_version"
 	compileOnly "org.projectlombok:lombok:$lombok_version"
 	annotationProcessor "org.projectlombok:lombok:$lombok_version"
+	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstruct_version"
 }
 
 test {

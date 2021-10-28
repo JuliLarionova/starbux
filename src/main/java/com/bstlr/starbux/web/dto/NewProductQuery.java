@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = NewItemQuery.NewItemQueryBuilder.class)
-public class NewItemQuery {
+@JsonDeserialize(builder = NewProductQuery.NewProductQueryBuilder.class)
+public class NewProductQuery {
     @NotNull
     String name;
     @NotNull
@@ -19,7 +19,7 @@ public class NewItemQuery {
     @NotNull
     Currency currency;
 
-    public enum ItemType {
+    public enum ProductType {
         DRINK, TOPPING;
     }
 }

@@ -1,6 +1,6 @@
 package com.bstlr.starbux.web.dto;
 
-import com.bstlr.starbux.web.dto.DrinkWithToppings.Topping;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto.Topping;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,8 +26,8 @@ public class TestDataFactory {
                 .build();
     }
 
-    public static DrinkWithToppings getDrinkWithToppings() {
-        return DrinkWithToppings.builder()
+    public static DrinkWithToppingsDto getDrinkWithToppings() {
+        return DrinkWithToppingsDto.builder()
                 .id(TEA_ID)
                 .toppings(Set.of(getTopping()))
                 .build();

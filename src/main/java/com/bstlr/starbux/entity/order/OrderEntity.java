@@ -25,9 +25,9 @@ public class OrderEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    OrderStatus status = OrderStatus.NEW;
+    OrderStatus status = OrderStatus.ACTIVE;
 
     public enum OrderStatus {
-        NEW, PLACED;
+        ACTIVE, PLACED;
     }
 }

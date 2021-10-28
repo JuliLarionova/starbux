@@ -16,5 +16,5 @@ public class OrderQuery {
     @NotNull
     CustomerInfoDto customerInfo;
     @Builder.Default
-    List<DrinkWithToppings> drinkWithToppings = new ArrayList<>();
+    List<DrinkWithToppingsDto> drinkWithToppings = new ArrayList<>();
 }

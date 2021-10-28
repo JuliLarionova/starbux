@@ -8,7 +8,7 @@ import com.bstlr.starbux.repository.OrderItemDrinkRepository;
 import com.bstlr.starbux.repository.OrderRepository;
 import com.bstlr.starbux.service.DrinkService;
 import com.bstlr.starbux.service.ToppingService;
-import com.bstlr.starbux.web.dto.DrinkWithToppings;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.NEW;
+import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.ACTIVE;
 import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.PLACED;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private static String NO_ACTIVE_ORDER = "No active order has been found for customer with email address %s = ";
+    private static String NO_ACTIVE_ORDER = "No active order has been found for customer with email address = %s";
     private static String ORDER_ALREADY_PLACED = "Order with id = %s has been already placed";
 
     private final OrderRepository repository;
@@ -34,7 +34,7 @@ public class OrderService {
     private Map<UUID, BigDecimal> toppingsWithPrices;
 
     public OrderEntity getCurrentOrderOrCreate(UUID customerId) {
-        Optional<OrderEntity> currentOrder = repository.findByCustomerIdAndStatus(customerId, NEW);
+        Optional<OrderEntity> currentOrder = repository.findByCustomerIdAndStatus(customerId, ACTIVE);
         if (currentOrder.isEmpty()) {
             return repository.save(OrderEntity.builder()
                     .customerId(customerId)
@@ -44,7 +44,7 @@ public class OrderService {
     }
 
     public UUID getActiveOrderByCustomerEmail(String emailAddress) {
-        return repository.getByCustomerEmailAddress(emailAddress, NEW)
+        return repository.getByCustomerEmailAddress(emailAddress, ACTIVE)
                 .orElseThrow(() -> new ClientException(String.format(NO_ACTIVE_ORDER, emailAddress)));
     }
 
@@ -52,7 +52,7 @@ public class OrderService {
         return repository.getById(orderId);
     }
 
-    public UUID addNewOrderItems(UUID customerId, Set<DrinkWithToppings> drinks) {
+    public UUID addNewOrderItems(UUID customerId, Set<DrinkWithToppingsDto> drinks) {
         setItemWithPrices(drinks);
         UUID orderId = getCurrentOrderOrCreate(customerId).getId();
 
@@ -75,19 +75,19 @@ public class OrderService {
         return orderId;
     }
 
-    private void setItemWithPrices(Set<DrinkWithToppings> drinks) {
-        Set<UUID> drinkIds = drinks.stream().map(DrinkWithToppings::getId)
+    private void setItemWithPrices(Set<DrinkWithToppingsDto> drinks) {
+        Set<UUID> drinkIds = drinks.stream().map(DrinkWithToppingsDto::getId)
                 .collect(Collectors.toSet());
         Set<UUID> toppingIds = drinks.stream()
-                .map(DrinkWithToppings::getToppings)
+                .map(DrinkWithToppingsDto::getToppings)
                 .flatMap(Collection::stream)
-                .map(DrinkWithToppings.Topping::getId)
+                .map(DrinkWithToppingsDto.Topping::getId)
                 .collect(Collectors.toSet());
         drinkWithPrices = drinkService.getDrinkPricesByIds(drinkIds);
         toppingsWithPrices = toppingService.getToppingPricesByIds(toppingIds);
     }
 
-    private List<OrderItemToppingEntity> convertToppings(Set<DrinkWithToppings.Topping> toppings) {
+    private List<OrderItemToppingEntity> convertToppings(Set<DrinkWithToppingsDto.Topping> toppings) {
         return toppings.stream()
                 .map(t -> OrderItemToppingEntity.builder()
                         .amount(t.getAmount())
@@ -103,7 +103,7 @@ public class OrderService {
 
     public void placeOrder(UUID orderId) {
         OrderEntity order = getOrderById(orderId);
-        if (order.getStatus() != NEW) {
+        if (order.getStatus() != ACTIVE) {
             throw new ClientException(String.format(ORDER_ALREADY_PLACED, orderId));
         }
         order.setStatus(PLACED);

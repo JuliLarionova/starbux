@@ -19,5 +19,5 @@ public class NewOrderItemsQuery {
     CustomerInfoDto customerInfo;
     @NotEmpty
     @Valid
-    Set<DrinkWithToppings> drinks;
+    Set<DrinkWithToppingsDto> drinks;
 }

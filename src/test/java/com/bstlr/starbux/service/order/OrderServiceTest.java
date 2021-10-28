@@ -10,7 +10,7 @@ import com.bstlr.starbux.entity.order.OrderEntity.OrderStatus;
 import com.bstlr.starbux.entity.order.OrderItemDrinkEntity;
 import com.bstlr.starbux.entity.order.OrderItemToppingEntity;
 import com.bstlr.starbux.repository.*;
-import com.bstlr.starbux.web.dto.DrinkWithToppings;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static com.bstlr.starbux.TestDataFactory.*;
-import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.NEW;
+import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.ACTIVE;
 import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.PLACED;
 import static com.bstlr.starbux.service.TestDataFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +56,7 @@ class OrderServiceTest extends BaseIT {
     @Test
     void returnsActiveOrderIdByCustomerEmail() {
         //given
-        createOrderWithStatus(NEW);
+        createOrderWithStatus(ACTIVE);
         //when
         UUID orderId = orderService.getActiveOrderByCustomerEmail(CUSTOMER_EMAIL);
         //then
@@ -74,7 +74,7 @@ class OrderServiceTest extends BaseIT {
     @Test
     void placesOrderSuccessfully() {
         //given
-        OrderEntity activeOrder = createOrderWithStatus(NEW);
+        OrderEntity activeOrder = createOrderWithStatus(ACTIVE);
         //when
         orderService.placeOrder(activeOrder.getId());
         //then
@@ -93,7 +93,7 @@ class OrderServiceTest extends BaseIT {
     @Test
     void getOrderAmountPerCustomer() {
         //given
-        createOrderWithStatus(NEW);
+        createOrderWithStatus(ACTIVE);
         //when
         List<OrdersPerCustomer> ordersPerCustomer = orderService.getOrderAmountPerCustomer();
         //then
@@ -104,8 +104,8 @@ class OrderServiceTest extends BaseIT {
     @Test
     void addsNewOrderItems() {
         //given
-        createOrderWithStatus(NEW);
-        Set<DrinkWithToppings> dataToSave = Set.of(getDrinkWithToppings());
+        createOrderWithStatus(ACTIVE);
+        Set<DrinkWithToppingsDto> dataToSave = Set.of(getDrinkWithToppings());
         //when
         UUID orderId = orderService.addNewOrderItems(CUSTOMER_ID, dataToSave);
         //then

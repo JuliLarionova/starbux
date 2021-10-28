@@ -14,8 +14,8 @@ import java.util.UUID;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = DrinkWithToppings.DrinkWithToppingsBuilder.class)
-public class DrinkWithToppings {
+@JsonDeserialize(builder = DrinkWithToppingsDto.DrinkWithToppingsDtoBuilder.class)
+public class DrinkWithToppingsDto {
     @NotNull
     UUID id;
     @Builder.Default
@@ -24,7 +24,7 @@ public class DrinkWithToppings {
 
     @Getter
     @Builder(toBuilder = true)
-    @JsonDeserialize(builder = DrinkWithToppings.Topping.ToppingBuilder.class)
+    @JsonDeserialize(builder = DrinkWithToppingsDto.Topping.ToppingBuilder.class)
     public static class Topping {
         @NotNull
         UUID id;

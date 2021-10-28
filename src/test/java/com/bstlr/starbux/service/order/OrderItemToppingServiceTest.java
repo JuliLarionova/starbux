@@ -7,7 +7,7 @@ import com.bstlr.starbux.entity.ToppingEntity;
 import com.bstlr.starbux.entity.order.OrderEntity;
 import com.bstlr.starbux.repository.*;
 import com.bstlr.starbux.service.MostUsedTopping;
-import com.bstlr.starbux.web.dto.DrinkWithToppings;
+import com.bstlr.starbux.web.dto.DrinkWithToppingsDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Set;
 
 import static com.bstlr.starbux.TestDataFactory.CUSTOMER_ID;
 import static com.bstlr.starbux.TestDataFactory.getCustomer;
-import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.NEW;
+import static com.bstlr.starbux.entity.order.OrderEntity.OrderStatus.ACTIVE;
 import static com.bstlr.starbux.service.TestDataFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -70,14 +70,14 @@ class OrderItemToppingServiceTest extends BaseIT {
     }
 
     private void saveOrderItemToppings() {
-        createOrderWithStatus(NEW);
-        DrinkWithToppings teaWith2Milk = getDrinkWithToppings();
+        createOrderWithStatus(ACTIVE);
+        DrinkWithToppingsDto teaWith2Milk = getDrinkWithToppings();
 
-        DrinkWithToppings.Topping topping = getTopping().toBuilder()
+        DrinkWithToppingsDto.Topping topping = getTopping().toBuilder()
                 .id(CHOCOLATE_SAUCE_ID)
                 .amount(3)
                 .build();
-        DrinkWithToppings latteWith3ChSauce = getDrinkWithToppings().toBuilder()
+        DrinkWithToppingsDto latteWith3ChSauce = getDrinkWithToppings().toBuilder()
                 .id(LATTE_ID)
                 .toppings(Set.of(topping))
                 .build();
