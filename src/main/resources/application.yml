@@ -1,10 +1,8 @@
-#logging:
-#  level:
-#    com.bstlr.starbux: debug
-#    org.hibernate.SQL: debug
-#    org.hibernate.type.descriptor.sql: trace
-#  aop:
-#    max-response-length: 2000
+logging:
+  level:
+    com.bstlr.starbux: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
 
 server:
   port: 8130

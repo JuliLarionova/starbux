@@ -37,7 +37,7 @@ dependencies {
 	testImplementation "junit:junit:$junit_version"
 	testImplementation 'org.hamcrest:hamcrest-library'
 	implementation "org.mapstruct:mapstruct:$mapstruct_version"
-/*	implementation ('ch.qos.logback:logback-core')*/
+	implementation ('ch.qos.logback:logback-core')
 
 	implementation "io.springfox:springfox-boot-starter:$springfox_version"
 	implementation "io.springfox:springfox-swagger-ui:$springfox_version"
