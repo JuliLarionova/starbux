@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = NewProductQuery.NewProductQueryBuilder.class)
-public class NewProductQuery {
+@JsonDeserialize(builder = ProductQuery.ProductQueryBuilder.class)
+public class ProductQuery {
     @NotNull
     String name;
     @NotNull

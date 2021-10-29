@@ -1,6 +1,7 @@
 package com.bstlr.starbux.service;
 
 import com.bstlr.starbux.BaseIT;
+import com.bstlr.starbux.common.ClientException;
 import com.bstlr.starbux.entity.Currency;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Assertions;
@@ -40,5 +41,13 @@ class DrinkServiceTest extends BaseIT {
         Map<UUID, BigDecimal> result = drinkService.getDrinkPricesByIds(Collections.emptyList());
         //then
         Assertions.assertEquals(result.size(), 0);
+    }
+
+    @Test
+    public void createsNewDrink_drinkAlreadyExists() {
+        //given
+        drinkService.createNewDrink(DRINK_TEA, TEA_PRICE, Currency.euro);
+        //when
+        Assertions.assertThrows(ClientException.class, () -> drinkService.createNewDrink(DRINK_TEA, TEA_PRICE, Currency.euro));
     }
 }
