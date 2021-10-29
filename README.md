@@ -8,7 +8,7 @@ For building application you have to create empty postgres database with paramet
 
 | Parameter       | Value                 |
 | ------------    | ----------------      |
-| name            | strabux               |     
+| name            | starbux               |     
 | user            | postgres              |     
 | password        | postgres              |     
 
